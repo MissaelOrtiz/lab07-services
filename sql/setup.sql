@@ -3,5 +3,5 @@ DROP TABLE IF EXISTS readings;
 CREATE TABLE readings (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     spread TEXT NOT NULL,
-    cards TEXT NOT NULL
+    cards TEXT
 );
