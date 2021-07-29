@@ -12,8 +12,8 @@ describe('demo reading routes', () => {
   it('creates a new reading via POST', async () => {
     const reading = { spread: '3' };
     const res = await request(app).post('/api/v1/readings').send(reading);
-    // const fakeCards = expect.any(String);
+    const fakeCards = expect.any(String);
     // This will be inserted into cards later.
-    expect(res.body).toEqual({ id: '1', ...reading, cards: null });
+    expect(res.body).toEqual({ id: '1', ...reading, cards: fakeCards });
   });
 });
