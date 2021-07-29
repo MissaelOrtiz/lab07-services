@@ -34,9 +34,9 @@ describe('demo reading routes', () => {
   });
   
   it('updates a reading by id via PUT', async () => {
-    const update = { spread: 2 };
+    const update = { spread: '2' };
     const reading = await ReadingService.generateReading({ spread: 1 });
-    const res = await request(app).put(`/api/v1/readings/${reading.id}`).send({ update });
+    const res = await request(app).put(`/api/v1/readings/${reading.id}`).send(update);
     const fakeCards = expect.any(String);
 
     expect(res.body).toEqual({ id: '1', ...update, cards: fakeCards });
