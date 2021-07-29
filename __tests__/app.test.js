@@ -41,4 +41,11 @@ describe('demo reading routes', () => {
 
     expect(res.body).toEqual({ id: '1', ...update, cards: fakeCards });
   });
+
+  it('deletes a reading by id via DELETE', async () => {
+    const reading = await ReadingService.generateReading({ spread: 1 });
+    const res = await request(app).delete(`/api/v1/readings/${reading.id}`);
+
+    expect(res.body).toEqual({ message: 'This reading does not exist.' });
+  });
 });
