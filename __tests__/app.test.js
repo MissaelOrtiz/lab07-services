@@ -3,6 +3,7 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import Reading from '../lib/models/Reading.js';
+import ReadingService from '../lib/services/ReadingService.js';
 
 describe('demo reading routes', () => {
   beforeEach(() => {
@@ -15,5 +16,12 @@ describe('demo reading routes', () => {
     const fakeCards = expect.any(String);
     // This will be inserted into cards later.
     expect(res.body).toEqual({ id: '1', ...reading, cards: fakeCards });
+  });
+
+  it('reads an existing reading by id via GET', async () => {
+    const reading = await ReadingService.generateReading({ spread: 1 });
+    const res = await request(app).get(`/api/v1/readings/${reading.id}`);
+
+    expect(res.body).toEqual(reading);
   });
 });
