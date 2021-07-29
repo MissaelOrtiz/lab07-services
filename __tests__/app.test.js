@@ -2,7 +2,7 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
-import Reading from '../lib/models/Reading.js';
+// import Reading from '../lib/models/Reading.js';
 import ReadingService from '../lib/services/ReadingService.js';
 
 describe('demo reading routes', () => {
@@ -23,5 +23,13 @@ describe('demo reading routes', () => {
     const res = await request(app).get(`/api/v1/readings/${reading.id}`);
 
     expect(res.body).toEqual(reading);
+  });
+
+  it('gets all readings via GET', async () => {
+    const reading1 = await ReadingService.generateReading({ spread: 1 });
+    const reading2 = await ReadingService.generateReading({ spread: 1 });
+    const res = await request(app).get('/api/v1/readings');
+
+    expect(res.body).toEqual([reading1, reading2]);
   });
 });
